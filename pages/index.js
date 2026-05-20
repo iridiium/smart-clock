@@ -1,11 +1,12 @@
-import Head from 'next/head';
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 
-import Clock from '@components/Clock';
-import News from '@components/News';
+import Clock from '@components/Clock'
+import News from '@components/News'
 
-export default function Home({ feed }) {
+export default function Home () {
   return (
-    <div className="bg-gradient-to-r from-red-600 to-indigo-900">
+    <div className="bg-gradient-to-br from-indigo-900 to-red-700">
       <div>
         <Head>
           <title>Clock</title>
@@ -13,10 +14,12 @@ export default function Home({ feed }) {
         </Head>
       </div>
 
-      <div className="flex flex-col space-y-12 items-center justify-center h-screen text-center text-indigo-100">
-        <Clock />
-        <News feed={feed} />
+      <div className="text-indigo-100">
+        <div className="flex flex-col space-y-12 items-center justify-center h-screen text-center relative z-0">
+            <Clock />
+            <News />
+        </div>
       </div>
     </div>
-  );
+  )
 }
