@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 
+import Weather from '@components/Weather'
+
 const daysOfWeek = [
   'Sunday', 'Monday', 'Tuesday', 'Wednesday',
   'Thursday', 'Friday', 'Saturday'
@@ -22,30 +24,20 @@ export default function Clock () {
     }, 100)
 
     return () => clearInterval(id)
-  }, [date])
+  }, [])
 
-  // Gets weather
-  const [weather, setWeather] = useState()
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      fetch('/api/weather')
-        .then(res => res.json())
-        .then(res => setWeather(res.data))
-    }, 10000)
-    return () => clearInterval(id)
-  }, [weather])
-
+  // Pass weather as a prop
   return (
-    <div className="relative flex flex-col space-y-12 items-center">
-      <div className="grid grid-rows-1 grid-flow-col align-center items-center">
-        <p className="text-4xl">
+    <div className="space-y-12">
+      <div className="text-4xl flex space-x-5">
+        <p>
           {`${daysOfWeek[date.getDay()]}, 
-            ${monthsOfYear[date.getMonth()]}
-            ${date.getDate()},
-            ${date.getFullYear()} 
-            | ${weather ? `${Math.round(weather.main.temp - 272)}ºC` : 'Loading weather...'}`}
+            ${monthsOfYear[date.getMonth()]} 
+            ${date.getDate()}, 
+            ${date.getFullYear()}`}
         </p>
+        <p>|</p>
+        <Weather />
       </div>
       <div className="font-bold text-8xl">
         <h1 className="title">{date.getHours() +
